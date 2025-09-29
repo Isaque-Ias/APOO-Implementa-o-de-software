@@ -1,5 +1,4 @@
-from typing import List
-import streamlit as st
+from typing import List, Dict
 from models import Item
 import dao as db
 
@@ -9,9 +8,9 @@ class ItemController:
         return db.listar_todos()
 
     @staticmethod
-    def criar_item(nome: str, descricao: str, quantidade: int) -> None:
-        if len(nome) < 5:
-            return {"error_id": 0, "description": "O nome deve conter mais de 5 caracteres."}
+    def criar_item(nome: str, descricao: str, quantidade: int) -> None | Dict:
+        if len(nome) < 3:
+            return {"error_id": 0, "description": "O nome deve conter mais de 3 caracteres."}
         try:
             quantidade = int(quantidade)
         except:
